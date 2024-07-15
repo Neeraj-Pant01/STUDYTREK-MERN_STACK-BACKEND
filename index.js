@@ -5,7 +5,8 @@ const cors = require("cors")
 const authRoute = require("./routes/auth.js")
 const userRoute = require("./routes/users.js")
 const courseRoute = require("./routes/cources.js")
-const orderRoute = require("./routes/orders.js")
+const orderRoute = require("./routes/orders.js");
+const blogroute = require("./routes/blogs.route.js")
 
 const app = express();
 app.use(express.json())    
@@ -21,6 +22,7 @@ app.use('/api/v1/auth',authRoute)
 app.use('/api/v1/users',userRoute)
 app.use('/api/v1/courses',courseRoute)
 app.use('/api/v1/orders',orderRoute)
+app.use('/api/v1/blogs',blogroute)
 
 const port = 9000;
 

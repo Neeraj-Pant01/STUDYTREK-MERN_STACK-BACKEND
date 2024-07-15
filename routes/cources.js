@@ -1,4 +1,4 @@
-const { getAllAvail, getpurchased, getSingleCourse, uploadCourse, deleteCourse, updateCourse } = require("../controllers/courses")
+const { getAllAvail, getpurchased, getSingleCourse, uploadCourse, deleteCourse, updateCourse, getAllCourses } = require("../controllers/courses")
 const verifyToken = require("../middlewares/jwtVerify")
 
 const router = require("express").Router()
@@ -21,4 +21,6 @@ router.put('/:id',verifyToken, updateCourse)
 //delete a course
 router.delete('/delete/:id',verifyToken,deleteCourse)
 
+//get all  courses with query
+router.get('/',getAllCourses)
 module.exports = router

@@ -23,7 +23,7 @@ exports.getAllUsers = async (req,res,next) =>{
 }
 
 exports.deleteUser = async (req,res,next) =>{
-    if(req.user.isAdmin){
+    if(req.payload.isAdmin){
         try{
             await userModel.findByIdAndDelete(req.params.id);
             res.status(200).json({message:"user has been deleted !"})
@@ -32,5 +32,22 @@ exports.deleteUser = async (req,res,next) =>{
         }
     }else{
         return next(createError(404,"you are not allowed to take this action !"))
+    }
+}
+
+exports.updateUser = async (req,res,next) =>{
+    if(req.payload.id === req.params.id){
+        try{
+            const user = await userModel.findByIdAndUpdate(req.params.id,{
+                $set: req.body
+            },{
+                new: true
+            })
+            res.status(200).json(user)
+        }catch(err){
+            console.log(err)
+        }
+    }else{
+        return next(createError(404,"you are not allowed to take this action"))
     }
 }

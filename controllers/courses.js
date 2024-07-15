@@ -91,3 +91,18 @@ exports.updateCourse = async (req,res,next) =>{
         next(err)
     }
 }
+
+//get all courses
+exports.getAllCourses = async (req,res,next) =>{
+    const q = req.query;
+    const filters = {
+        ...(q.userId && {userId: q.userId}),
+        ...(q.search && {name: {$regex: q.search, $options: "i"} })
+    }
+    try{
+        const response = q.show ? await courseModel.find().limit(6) : await courseModel.find(filters).sort({createdAt: -1});
+        res.status(200).json(response)
+    }catch(err){
+        next(err)
+    }
+}

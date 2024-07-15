@@ -41,12 +41,10 @@ const courseSchema = new mongoose.Schema({
     },
     notes:{
         type:String,
-        type:String,
         required: true
     },
     lectures:{
-        type:String,
-        type:String,
+        type:[String],
         required: true
     },
     testSeries:{
@@ -55,6 +53,9 @@ const courseSchema = new mongoose.Schema({
     },
     interviewQuestions:{
         type:String
+    },
+    features:{
+        type:[String]
     }
 
 },{timestamps:true})

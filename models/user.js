@@ -7,14 +7,21 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
+        
+    },
+    number:{
+        type:String,
+        unique:true
     },
     password:{
         type:String,
-        required:true
+        // required:true
     },
     isSeller:{
         type:Boolean,
+        default:false,
         required:true
     },
     isAdmin:{
