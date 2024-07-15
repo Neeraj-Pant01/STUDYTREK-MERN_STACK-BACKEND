@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 const userModel = require("../models/user.js");
 const createError = require("../utils/createError.js")
 const jwt = require('jsonwebtoken')
@@ -8,8 +8,8 @@ exports.register = async(req,res,next)=>{
         const user = await userModel.findOne({email:req.body.email})
         if(user) return next(createError(400, "user with this email is alredy exists !"))
 
-        const salt = await bcrypt.genSalt(10);
-        const hashPass = await bcrypt.hash(req.body.password, salt)
+        const salt = bcryptjs.genSaltSync(10);
+        const hashPass = bcryptjs.hashSync(req.body.password, salt)
 
         const newUSer = new userModel({...req.body, password:hashPass,isSeller:false, isAdmin:false})
         
@@ -26,8 +26,8 @@ exports.registerSeller = async(req,res,next)=>{
         const user = await userModel.findOne({email:req.body.email})
         if(user) return next(createError(400, "user with this email is alredy exists !"))
 
-        const salt = await bcrypt.genSalt(10);
-        const hashPass = await bcrypt.hash(req.body.password, salt)
+        const salt = bcryptjs.genSaltSync(10);
+        const hashPass = bcryptjs.hashSync(req.body.password, salt)
 
         const newUSer = new userModel({...req.body, password:hashPass, isSeller:true})
         await newUSer.save()
@@ -42,7 +42,7 @@ exports.login = async(req,res,next)=>{
         const user = await userModel.findOne({email:req.body.email});
         if(!user) return next(createError(404, "no such user is found with this email"))
 
-        const isCorrect = await bcrypt.compare(req.body.password, user.password)
+        const isCorrect = bcryptjs.compareSync(req.body.password, user.password)
 
         if(!isCorrect) return next(createError(401, "email or password didn't matched"))
 
