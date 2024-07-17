@@ -10,7 +10,7 @@ router.post('/',verifyToken,postAblog)
 router.delete('/:id',verifyToken,deleteBlog)
 
 //get a blog
-router.get('/',getAblog)
+router.get('/:id',getAblog)
 
 //get all blogs
 router.get('/blogs',getAllBlogs)
