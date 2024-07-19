@@ -44,8 +44,8 @@ const courseSchema = new mongoose.Schema({
         required: true
     },
     lectures:{
-        type:[String],
-        required: true
+        type:String,
+        required:true
     },
     testSeries:{
         type:String,
@@ -55,7 +55,7 @@ const courseSchema = new mongoose.Schema({
         type:String
     },
     features:{
-        type:[String]
+        type:String
     }
 
 },{timestamps:true})

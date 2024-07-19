@@ -13,7 +13,7 @@ router.delete('/:id',verifyToken,deleteBlog)
 router.get('/:id',getAblog)
 
 //get all blogs
-router.get('/blogs',getAllBlogs)
+router.get('/',getAllBlogs)
 
 //get user's all blogs
 router.get('/all',verifyToken,getAllProfileBlogs)

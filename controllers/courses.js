@@ -30,8 +30,15 @@ exports.getpurchased = async (req,res,next) =>{
 
 exports.getSingleCourse = async(req,res,next) =>{
     try{
+        const userId = req.body.userId;
         const course = await courseModel.findById(req.params.id)
+        if(course.buyers.includes(userId))
+        {
         res.status(200).json(course)
+        }else{
+            const {lectures, buyers, ...others} = course._doc
+            res.status(200).json(others)
+        }
     }catch(err){
         next(err)
     }
