@@ -12,7 +12,7 @@ router.post('/google',loginWithGoogle)
 router.post('/seller/register',registerSeller)
 
 //login as seller
-router.post('/seller/login')
+// router.post('/seller/login')
 
 module.exports = router;
 
