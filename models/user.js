@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2")
+const mongooseVirtuals = require("mongoose-lean-virtuals");
 
 const userSchema = new mongoose.Schema({
     username:{
@@ -17,7 +19,6 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type:String,
-        // required:true
     },
     isSeller:{
         type:Boolean,
@@ -31,7 +32,15 @@ const userSchema = new mongoose.Schema({
     profilepic:{
         type:String,
         required:false
+    },
+    otherinfo:{
+        type:[mongoose.Schema.Types.Mixed]
     }
-},{timestamps:true})
+},
+{
+    timestamps:true,
+    toJSON:{virtuals:true},
+    toObject:{virtuals: true}
+})
 
 module.exports = mongoose.model('users',userSchema)

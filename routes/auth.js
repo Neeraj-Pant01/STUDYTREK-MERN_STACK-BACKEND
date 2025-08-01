@@ -3,6 +3,7 @@ const { register, login, getUser, loginWithGoogle, registerSeller } = require(".
 const router = require("express").Router()
 
 router.post('/register',register)
+
 router.post('/login',login)
 
 //sign in with google
