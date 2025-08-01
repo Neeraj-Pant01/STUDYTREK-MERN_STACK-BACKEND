@@ -33,6 +33,13 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:false
     },
+    purchasedCourses:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"courses"
+        }
+    ]
+    ,
     otherinfo:{
         type:[mongoose.Schema.Types.Mixed]
     }
@@ -41,6 +48,16 @@ const userSchema = new mongoose.Schema({
     timestamps:true,
     toJSON:{virtuals:true},
     toObject:{virtuals: true}
+})
+
+userSchema.plugin(mongoosePaginate)
+userSchema.plugin(mongooseVirtuals);
+
+userSchema.virtual('courses',{
+    ref:"courses",
+    localField:"_id",
+    foreignField:"userId",
+    justOne:true
 })
 
 module.exports = mongoose.model('users',userSchema)
